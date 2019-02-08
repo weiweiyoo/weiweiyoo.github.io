@@ -401,7 +401,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-02-08 16:06:38" itemprop="dateModified" datetime="2019-02-08T16:06:38+08:00">2019-02-08</time>
+                <time title="修改时间：2019-02-08 16:28:58" itemprop="dateModified" datetime="2019-02-08T16:28:58+08:00">2019-02-08</time>
               
             
           </span>
@@ -444,8 +444,9 @@
 <h4 id="3-使用order-by语句猜测字段数"><a href="#3-使用order-by语句猜测字段数" class="headerlink" title="3. 使用order by语句猜测字段数"></a>3. 使用order by语句猜测字段数</h4><p>   playload: <a href="http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;" target="_blank" rel="noopener">http://192.168.247.133/pentest/test/sqli/sqltamp.php?gid=1&#39;</a> order by 1/2/3/4 –+</p>
 <p>   我们都知道#是sql语句中的注释符，在该符号以后的语句不会被执行。</p>
 <p>   后台的sql查询语句可能是这样的</p>
-   <font color="#66CDAA"> $id=$_GET[‘id’]<br>    $sql=”SELECT * FROM users WHERE id=’$id’ </font>
-
+<pre><code class="bash"><span class="variable">$id</span>=<span class="variable">$_GET</span>[<span class="string">'id'</span>] 
+<span class="variable">$sql</span>=<span class="string">"SELECT * FROM users WHERE id='<span class="variable">$id</span>' </span>
+</code></pre>
 <p>   构造playload时，使用’将后台sql语句中的第一个单引号闭合，然后只需要将sql语句中的第二个单引号注释掉就可以了。</p>
 <p>   这时后台查询语句相当于<font color="#66CDAA">$sql=”SELECT * FROM users WHERE id=’gid=1’ order by 4 #’</font></p>
 <p>   这里构造playload时之所以不用 # 而用 –+ 是因为get与post请求注释符有所区别。#是sql语句的注释符，+在http请求中表示空格，但在http请求时会进行url的转义，因此get、post请求到后端语句会与预想的不同。这里为get请求，可以采取 –+ 或者直接使用 # 转义后的%23。</p>
